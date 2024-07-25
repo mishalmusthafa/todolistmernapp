@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+
 function Register() {
     const [formData, setFormData] = useState({
         name: '',
@@ -24,16 +26,20 @@ function Register() {
         });
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        console.log('submited');
-    };
-
     const setPassVisbility = (e) => {
         setShowPassword((prevState) => ({
             ...prevState,
             [e.target.name]: !prevState[e.target.name],
         }));
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (!name || !email || !password || !password2)
+            toast.error('Please enter all the fields');
+        if (password !== password2) {
+            toast.error('Password do not match');
+        }
     };
 
     return (

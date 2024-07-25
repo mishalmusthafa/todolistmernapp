@@ -5,10 +5,12 @@ function Header() {
     return (
         <nav className="relative mb-3">
             <div className="flex justify-between py-3 px-5 items-center">
-                <Link to="/">
-                    <h1 className="text-xl">TODO LISTS</h1>
-                </Link>
-                <div>
+                <div className="logo">
+                    <Link to="/">
+                        <h1 className="text-xl">TODO LISTS</h1>
+                    </Link>
+                </div>
+                <div className=''>
                     <Link to="/login">
                         <button className="btn btn-primary mr-4 text-lg">
                             login
