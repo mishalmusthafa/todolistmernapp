@@ -1,10 +1,14 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { register, reset } from '../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Register() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -15,6 +19,23 @@ function Register() {
         showPassword1: false,
         showPassword2: false,
     });
+
+    const dispatch = useDispatch();
+    const { user, isLoading, isSuccess, isError, message } = useSelector(
+        (state) => state.auth
+    );
+
+    useEffect(() => {
+        if (isSuccess && user) {
+            navigate('/');
+        }
+
+        if (isError || message) {
+            toast.error(message);
+        }
+
+        dispatch(reset());
+    }, [isError, isSuccess, user, message, navigate, dispatch]);
 
     const { name, email, password, password2 } = formData;
     const { showPassword1, showPassword2 } = showPassword;
@@ -35,12 +56,18 @@ function Register() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!name || !email || !password || !password2)
-            toast.error('Please enter all the fields');
+
         if (password !== password2) {
             toast.error('Password do not match');
+        } else {
+            const userData = { name, email, password };
+            dispatch(register(userData));
         }
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="hero w-full">

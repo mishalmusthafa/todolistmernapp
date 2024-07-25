@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // @desc Register new user
-// @route /api/users
+// @route POST /api/users
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
