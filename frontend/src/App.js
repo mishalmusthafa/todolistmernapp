@@ -12,16 +12,16 @@ function App() {
     return (
         <>
             <Router>
-                <div className="min-h-screen flex flex-col">
+                <div className="flex flex-col min-h-screen ">
                     <Header />
-                    <div className="container mx-auto flex-grow">
+                    <main className="flex flex-grow">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                         </Routes>
-                    </div>
+                    </main>
                     <Footer />
                 </div>
             </Router>

@@ -38,9 +38,9 @@ function Login() {
     };
 
     return (
-        <div className="hero min-h-screen">
+        <div className="hero w-full ">
             {/* Login and other texts */}
-            <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero-content flex-col lg:flex-row-reverse items-center justify-center">
                 <div className="text-center lg:text-left min-w-80">
                     <h1 className="text-5xl font-bold">Login now!</h1>
                     <p className="py-6">
