@@ -25,6 +25,6 @@ const ThemeSwitcher = () => {
             <option value="cupcake">Cupcake</option>
         </select>
     );
-};  
+};
 
 export default ThemeSwitcher;
