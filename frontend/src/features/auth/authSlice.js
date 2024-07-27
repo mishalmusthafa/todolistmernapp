@@ -38,19 +38,35 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.user = action.payload;
                 state.isSuccess = true;
+            })
+            .addCase(login.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(login.rejected, (state, action) => {
+                state.isLoading = false;
+                state.user = null;
+                state.isError = true;
+                state.isSuccess = false;
+                state.message = action.payload;
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.user = action.payload;
+                state.isSuccess = true;
+            })
+
+            .addCase(logout.fulfilled, (state) => {
+                state.isLoading = false;
+                state.user = null;
             });
     },
 });
 
+// Register user
 export const register = createAsyncThunk(
     'auth/register',
     async (user, thunkAPI) => {
-        console.log(
-            'got user from frontend and sending to registerService by asyncThunk',
-            user
-        );
         try {
-            console.log('TRY to send to authservice.register');
             return await authService.register(user);
         } catch (error) {
             const message =
@@ -59,15 +75,34 @@ export const register = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
-            console.log(
-                'got an error from the backend when fetching:',
-                message
-            );
 
             return thunkAPI.rejectWithValue(message);
         }
     }
 );
+
+// Login user
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+    try {
+        return await authService.login(user);
+    } catch (error) {
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
+// logout user
+export const logout = createAsyncThunk('auth/logout', () => {
+    console.log('logging out');
+    authService.logout();
+    console.log('logged out');
+});
 
 export const { reset } = authSlice.actions;
 export default authSlice.reducer;

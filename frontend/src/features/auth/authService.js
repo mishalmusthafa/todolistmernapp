@@ -12,10 +12,12 @@ const register = async (userData) => {
     }
     return response.data;
 };
+
+
 //Login user
 const login = async (userData) => {
-    console.log('Triying to register the user with userdata', userData);
-    const response = await axios.post(API_URL+'/login', userData);
+    console.log('Triying to login with user with userdata', userData);
+    const response = await axios.post(API_URL + '/login', userData);
 
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -23,8 +25,14 @@ const login = async (userData) => {
     return response.data;
 };
 
+// Logout user
+const logout = () => {
+    localStorage.removeItem('user');
+};
+
 const authService = {
     register,
+    logout,
     login,
 };
 

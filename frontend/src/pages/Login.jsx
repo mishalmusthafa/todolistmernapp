@@ -1,22 +1,39 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { login, reset } from '../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [formData, setFormData] = useState({
-        name: '',
         email: '',
         password: '',
-        password2: '',
     });
     const [showPassword, setShowPassword] = useState({
         showPassword1: false,
-        showPassword2: false,
     });
 
-    const { name, email, password, password2 } = formData;
-    const { showPassword1, showPassword2 } = showPassword;
+    const { email, password } = formData;
+    const { showPassword1 } = showPassword;
+
+    const { user, isLoading, isSuccess, isError, message } = useSelector(
+        (state) => state.auth
+    );
+
+    useEffect(() => {
+        if (isSuccess || user) {
+            navigate('/');
+        }
+        if (isError || message) {
+            toast.error(message);
+        }
+        dispatch(reset());
+    }, [isError, isSuccess, user, message, navigate, dispatch]);
 
     const onChange = (e) => {
         setFormData({
@@ -27,7 +44,8 @@ function Login() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log('submited');
+        const userData = { email, password };
+        dispatch(login(userData));
     };
 
     const setPassVisbility = (e) => {

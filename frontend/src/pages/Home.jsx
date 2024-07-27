@@ -33,7 +33,7 @@ function Home() {
                         <main className="card-body">
                             <h2 className="card-title text-primary">Tasks</h2>
                             <ul className="space-y-2">
-                                <li className="rounded-xl p-3 bg-white/20 text-white">
+                                <li className="rounded-xl p-3 bg-white/20 ">
                                     Task1
                                 </li>
                             </ul>
