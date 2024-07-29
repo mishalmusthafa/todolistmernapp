@@ -1,10 +1,10 @@
 const express = require('express');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const dotenv = require('dotenv').config();
-const colors = require('colors')
-const connectDB = require('./config/db')
+const colors = require('colors');
+const connectDB = require('./config/db');
 
-connectDB()
+connectDB();
 const PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/todos', require('./routes/todoRoutes'));
 
 // Error handler middleware
 app.use(errorHandler);
