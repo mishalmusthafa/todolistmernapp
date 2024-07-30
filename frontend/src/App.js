@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './components/PrivateRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -16,7 +17,9 @@ function App() {
                     <Header />
                     <main className="flex flex-grow">
                         <Routes>
-                            <Route path="/" element={<Home />} />
+                            <Route path="/" element={<PrivateRoute />}>
+                                <Route path="/" element={<Home />} />
+                            </Route>
                             <Route path="/about" element={<About />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />

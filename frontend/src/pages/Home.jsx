@@ -1,6 +1,9 @@
 import React from 'react';
 
 function Home() {
+
+
+
     return (
         <div className="flex flex-col items-center w-full">
             <div className="w-full max-w-5xl px-4">
