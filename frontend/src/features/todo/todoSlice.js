@@ -16,8 +16,9 @@ export const createTodo = createAsyncThunk(
     async (todoData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token;
-            console.log(token);
-            return await todoService.createTicket(todoData, token);
+            console.log('Creating todos');
+            console.log('Todo data', todoData);
+            return await todoService.createTodo(todoData, token);
         } catch (error) {
             const message =
                 (error.response &&
@@ -25,6 +26,7 @@ export const createTodo = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
+            console.log(message);
             return thunkAPI.rejectWithValue(message);
         }
     }
@@ -53,7 +55,12 @@ export const todoSlice = createSlice({
     name: 'todo',
     initialState,
     reducers: {
-        reset: (state) => initialState,
+        reset: (state) => {
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isError = false;
+            state.message = '';
+        },
     },
     extraReducers: (builder) => {
         builder

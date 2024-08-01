@@ -4,6 +4,7 @@ const API_URL = '/api/todos/';
 
 // Create new todo
 const createTodo = async (ticketData, token) => {
+    console.log('got ticketData', ticketData);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
