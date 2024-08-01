@@ -1,8 +1,18 @@
 import React from 'react';
+import Tasks from '../components/Tasks';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
+import { useState } from 'react';
 
 function Home() {
+    const dispatch = useDispatch();
+    const [addTaskState, setAddTaskState] = useState(false);
 
+    const addTask = (...payload) => {};
 
+    const getAllTodos = () => {
+        dispatch(getTodos());
+    };
 
     return (
         <div className="flex flex-col items-center w-full">
@@ -17,7 +27,10 @@ function Home() {
                         <nav className="card-body">
                             <h2 className="card-title text-primary">Filters</h2>
                             <ul className="space-y-2">
-                                <li className="text-start p-2 rounded-lg  transition-colors ease duration-300 hover:bg-white/20 cursor-pointer">
+                                <li
+                                    className="text-start p-2 rounded-lg  transition-colors ease duration-300 hover:bg-white/20 cursor-pointer"
+                                    onClick={getAllTodos}
+                                >
                                     All
                                 </li>
                                 <li className="text-start p-2 rounded-lg transition-colors ease duration-300  hover:bg-white/20 cursor-pointer">
@@ -33,16 +46,16 @@ function Home() {
                         </nav>
                     </div>
                     <div className="w-3/4 card bg-base-200 shadow-xl h-full">
-                        <main className="card-body">
-                            <h2 className="card-title text-primary">Tasks</h2>
-                            <ul className="space-y-2">
-                                <li className="rounded-xl p-3 bg-white/20 ">
-                                    Task1
-                                </li>
-                            </ul>
-                        </main>
+                        <Tasks />
                     </div>
                 </div>
+
+                <button
+                    onClick={addTask}
+                    className="btn btn-primary mt-4 text-lg"
+                >
+                    Add tasks
+                </button>
             </div>
         </div>
     );
