@@ -51,7 +51,7 @@ function AddTask() {
     const addTasks = (e) => {
         e.preventDefault();
         dispatch(createTodo(formData));
-        navigate('/');
+        // navigate('/');
     };
 
     if (isLoading) {

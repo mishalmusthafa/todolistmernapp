@@ -1,6 +1,7 @@
 import React from 'react';
 import Todos from '../components/Todos';
 import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedFilter } from '../features/filter/filterSlice';
 import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
 import { useState } from 'react';
 import Starred from '../components/Starred';
@@ -8,14 +9,15 @@ import Tasks from '../components/Todos';
 import TodayTodos from '../components/TodayTodos';
 import WeekTodo from '../components/WeekTodo';
 import AddTask from '../components/AddTask';
+import EditTask from '../components/EditTask';
 
 function Home() {
     const dispatch = useDispatch();
     const [addTaskState, setAddTaskState] = useState(false);
-    const [selectedFilter, setSelectedFilter] = useState('All');
+    const selectedFilter = useSelector((state) => state.filter.selectedFilter);
 
     const handleFilterClick = (filter) => {
-        setSelectedFilter(filter);
+        dispatch(setSelectedFilter(filter));
     };
 
     const renderContent = () => {
@@ -30,6 +32,8 @@ function Home() {
                 return <WeekTodo />;
             case 'AddTask':
                 return <AddTask />;
+            case 'EditTask':
+                return <EditTask />;
             default:
                 return <Todos />;
         }
