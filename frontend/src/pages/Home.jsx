@@ -1,27 +1,28 @@
 import React from 'react';
-import Todos from '../components/Todos';
+import Todos from '../components/TodosItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedFilter } from '../features/filter/filterSlice';
 import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
 import { useState } from 'react';
 import Starred from '../components/Starred';
-import Tasks from '../components/Todos';
+import Tasks from '../components/TodosItem';
 import TodayTodos from '../components/TodayTodos';
 import WeekTodo from '../components/WeekTodo';
 import AddTask from '../components/AddTask';
 import EditTask from '../components/EditTask';
+import ShowTask from '../components/ShowTask';
+import { setSelectedView } from '../features/activeView/activeViewSlice';
 
 function Home() {
     const dispatch = useDispatch();
     const [addTaskState, setAddTaskState] = useState(false);
-    const selectedFilter = useSelector((state) => state.filter.selectedFilter);
+    const selectedView = useSelector((state) => state.activeView.selectedView);
 
-    const handleFilterClick = (filter) => {
-        dispatch(setSelectedFilter(filter));
+    const handleActiveViewClick = (view) => {
+        dispatch(setSelectedView(view));
     };
 
     const renderContent = () => {
-        switch (selectedFilter) {
+        switch (selectedView) {
             case 'All':
                 return <Todos />;
             case 'Starred':
@@ -34,6 +35,8 @@ function Home() {
                 return <AddTask />;
             case 'EditTask':
                 return <EditTask />;
+            case 'ShowTask':
+                return <ShowTask />;
             default:
                 return <Todos />;
         }
@@ -53,19 +56,19 @@ function Home() {
                             <h2 className="card-title text-primary">Filters</h2>
                             <ul className="space-y-2">
                                 {['All', 'Starred', 'Today', 'Week'].map(
-                                    (filter) => (
+                                    (view) => (
                                         <li
-                                            key={filter}
+                                            key={view}
                                             className={`text-start p-2 rounded-lg transition-colors ease duration-300 hover:bg-white/20 cursor-pointer ${
-                                                selectedFilter === filter
+                                                selectedView === view
                                                     ? 'bg-white/20'
                                                     : ''
                                             }`}
                                             onClick={() =>
-                                                handleFilterClick(filter)
+                                                handleActiveViewClick(view)
                                             }
                                         >
-                                            {filter}
+                                            {view}
                                         </li>
                                     )
                                 )}
@@ -74,9 +77,9 @@ function Home() {
                     </div>
                     <div className="w-3/4 card bg-base-200 shadow-xl h-full">
                         {renderContent()}
-                        {selectedFilter !== 'AddTask' ? (
+                        {selectedView !== 'AddTask' ? (
                             <button
-                                onClick={() => handleFilterClick('AddTask')}
+                                onClick={() => handleActiveViewClick('AddTask')}
                                 className="btn btn-primary mt-4 text-lg absolute bottom-5 right-5"
                             >
                                 Add tasks

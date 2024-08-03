@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { getTodos, reset } from '../features/todo/todoSlice';
 import TodoItem from './TodoItem';
 
-
 function Tasks() {
     const { todos, isLoading, isSuccess } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
