@@ -1,16 +1,16 @@
 import React from 'react';
-import Todos from '../components/TodosItem';
+import Todos from '../components/TodoList';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
 import { useState } from 'react';
-import Starred from '../components/Starred';
-import Tasks from '../components/TodosItem';
+import Starred from '../components/StarredTodo';
+import Tasks from '../components/TodoList';
 import TodayTodos from '../components/TodayTodos';
 import WeekTodo from '../components/WeekTodo';
 import AddTask from '../components/AddTask';
 import EditTask from '../components/EditTask';
-import ShowTask from '../components/ShowTask';
 import { setSelectedView } from '../features/activeView/activeViewSlice';
+import ShowSingleTodo from '../components/ShowSingleTodo';
 
 function Home() {
     const dispatch = useDispatch();
@@ -35,8 +35,8 @@ function Home() {
                 return <AddTask />;
             case 'EditTask':
                 return <EditTask />;
-            case 'ShowTask':
-                return <ShowTask />;
+            case 'ShowSingleTodo':
+                return <ShowSingleTodo />;
             default:
                 return <Todos />;
         }
@@ -77,7 +77,9 @@ function Home() {
                     </div>
                     <div className="w-3/4 card bg-base-200 shadow-xl h-full">
                         {renderContent()}
-                        {selectedView !== 'AddTask' ? (
+                        {selectedView !== 'AddTask' &&
+                        selectedView !== 'EditTask' &&
+                        selectedView !== 'ShowSingleTodo' ? (
                             <button
                                 onClick={() => handleActiveViewClick('AddTask')}
                                 className="btn btn-primary mt-4 text-lg absolute bottom-5 right-5"

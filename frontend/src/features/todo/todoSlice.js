@@ -51,6 +51,25 @@ export const getTodos = createAsyncThunk(
     }
 );
 
+// Get single todo
+export const getSingleTodo = createAsyncThunk(
+    'todos/getSingle',
+    async (id, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token;
+            return await todoService.getSingleTodo(id, token);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 export const todoSlice = createSlice({
     name: 'todo',
     initialState,
@@ -88,6 +107,19 @@ export const todoSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.todos = action.payload;
+            })
+            .addCase(getSingleTodo.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getSingleTodo.rejected, (state, action) => {
+                state.isSuccess = false;
+                state.isError = true;
+                state.message = action.payload;
+            })
+            .addCase(getSingleTodo.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.todo = action.payload;
             });
     },
 });

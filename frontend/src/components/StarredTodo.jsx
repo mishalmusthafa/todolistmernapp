@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { getTodos, reset } from '../features/todo/todoSlice';
 import TodoItem from './TodoItem';
 
-function Starred() {
+function StarredTodo() {
     const { todos, isLoading, isSuccess } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
 
@@ -21,7 +21,6 @@ function Starred() {
     }, [dispatch]);
 
     const starredTodos = todos.filter((todo) => todo.favourite === true);
-    console.log(starredTodos);
 
     if (isLoading) {
         return <Spinner />;
@@ -37,8 +36,9 @@ function Starred() {
                     </li>
                 ))}
             </ul>
+            
         </main>
     );
 }
 
-export default Starred;
+export default StarredTodo;

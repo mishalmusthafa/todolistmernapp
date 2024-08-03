@@ -27,8 +27,21 @@ const getTodos = async (token) => {
     return response.data;
 };
 
+// Get SingleTodo
+const getSingleTodo = async (id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    const response = await axios.get(API_URL + id, config);
+    console.log('getSingleTodo data', response.data);
+    return response.data;
+};
+
 const todoService = {
     createTodo,
     getTodos,
+    getSingleTodo,
 };
 export default todoService;
