@@ -7,6 +7,8 @@ const initialState = {
     isLoading: false,
     isSuccess: false,
     isError: false,
+    selectedTodo: {},
+    currentTodoId: null,
     message: '',
 };
 
@@ -70,15 +72,46 @@ export const getSingleTodo = createAsyncThunk(
     }
 );
 
+// Update todo
+export const updateTodo = createAsyncThunk(
+    'todos/update',
+    async ({ todoData, id }, thunkAPI) => {
+        try {
+            console.log('Getting the data for updata to slice', todoData);
+            const token = thunkAPI.getState().auth.user.token;
+            return await todoService.updateTodo(todoData, id, token);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            console.log(message);
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 export const todoSlice = createSlice({
     name: 'todo',
     initialState,
     reducers: {
         reset: (state) => {
+            state.todo = {};
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = false;
             state.message = '';
+        },
+        clearTodos: (state) => {
+            state.todos = [];
+        },
+        setCurrentTodoId: (state, action) => {
+            state.selectedTodo =
+                state.todos.find((todo) => todo._id === action.payload) || {};
+            console.log(state.selectedTodo);
+            state.currentTodoId = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -120,9 +153,29 @@ export const todoSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.todo = action.payload;
+            })
+            .addCase(updateTodo.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(updateTodo.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+            })
+            .addCase(updateTodo.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                const updatedTodo = action.payload;
+                const index = state.todos.findIndex(
+                    (todo) => todo._id === updatedTodo._id
+                );
+                if (index !== -1) {
+                    state.todos[index] = updatedTodo;
+                }
+                state.selectedTodo = updatedTodo;
             });
     },
 });
 
-export const { reset } = todoSlice.actions;
+export const { reset, setCurrentTodoId } = todoSlice.actions;
 export default todoSlice.reducer;

@@ -3,23 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import { CiStar } from 'react-icons/ci';
 import { FaStar } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
-import { createTodo, reset } from '../features/todo/todoSlice';
+import { reset, updateTodo } from '../features/todo/todoSlice';
 import Spinner from './Spinner';
 import { toast } from 'react-toastify';
+import { setSelectedView } from '../features/activeView/activeViewSlice';
 
 function EditTask() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { todo, isLoading, isError, isSuccess, message } = useSelector(
-        (state) => state.todo
-    );
+    const selectedView = useSelector((state) => state.activeView.selectedView);
+
+    const {
+        selectedTodo,
+        currentTodoId,
+        isLoading,
+        isError,
+        isSuccess,
+        message,
+    } = useSelector((state) => state.todo);
 
     const [formData, setFormData] = useState({
-        title: todo.title,
-        description: todo.description,
-        due: todo.due,
-        favourite: todo.favourite,
+        title: selectedTodo.title || '',
+        description: selectedTodo.description || '',
+        due: selectedTodo.due || '',
+        favourite: selectedTodo.favourite || false,
     });
 
     const { title, description, due, favourite } = formData;
@@ -32,7 +40,7 @@ function EditTask() {
             dispatch(reset());
         }
         dispatch(reset());
-    }, [dispatch, isError, isSuccess, message, navigate]);
+    }, [dispatch, isError, message, isSuccess]);
 
     const onChange = (e) => {
         setFormData((pervState) => ({
@@ -48,10 +56,11 @@ function EditTask() {
         }));
     };
 
-    const addTasks = (e) => {
+    const updateTasks = (e) => {
         e.preventDefault();
-        dispatch(createTodo(formData));
-        dispatch();
+        dispatch(updateTodo({ todoData: formData, id: currentTodoId }));
+        // dispatch(reset());
+        dispatch(setSelectedView('All'));
     };
 
     if (isLoading) {
@@ -61,7 +70,7 @@ function EditTask() {
     return (
         <main className="card-body">
             <h2 className="card-title text-primary">Edit Tasks</h2>
-            <form className="max-h-96 overflow-auto" onSubmit={addTasks}>
+            <form className="max-h-96 overflow-auto" onSubmit={updateTasks}>
                 <div className="form-control">
                     <label htmlFor="title" className="label ">
                         <span className="label-text text-primary text-lg">

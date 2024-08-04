@@ -5,6 +5,7 @@ import { FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../components/Spinner';
 
 function Login() {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Login() {
     const { email, password } = formData;
     const { showPassword1 } = showPassword;
 
-    const { user, isLoading, isSuccess, isError, message } = useSelector(
+    const { user, isSuccess, isError, message } = useSelector(
         (state) => state.auth
     );
 

@@ -3,14 +3,14 @@ import axios from 'axios';
 const API_URL = '/api/todos/';
 
 // Create new todo
-const createTodo = async (ticketData, token) => {
-    console.log('got ticketData', ticketData);
+const createTodo = async (todoData, token) => {
+    console.log('got todoData', todoData);
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     };
-    const response = await axios.post(API_URL, ticketData, config);
+    const response = await axios.post(API_URL, todoData, config);
     console.log(response.data);
     return response.data;
 };
@@ -39,9 +39,24 @@ const getSingleTodo = async (id, token) => {
     return response.data;
 };
 
+// Update todo
+const updateTodo = async (todoData, id, token) => {
+    console.log('got todoData', todoData, id);
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const response = await axios.put(API_URL + id, todoData, config);
+    console.log(response.data);
+    return response.data;
+};
+
 const todoService = {
     createTodo,
     getTodos,
     getSingleTodo,
+    updateTodo,
 };
 export default todoService;

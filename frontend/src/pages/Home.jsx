@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Todos from '../components/TodoList';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
-import { useState } from 'react';
 import Starred from '../components/StarredTodo';
 import Tasks from '../components/TodoList';
 import TodayTodos from '../components/TodayTodos';
@@ -14,8 +13,11 @@ import ShowSingleTodo from '../components/ShowSingleTodo';
 
 function Home() {
     const dispatch = useDispatch();
-    const [addTaskState, setAddTaskState] = useState(false);
     const selectedView = useSelector((state) => state.activeView.selectedView);
+
+    useEffect(() => {
+        dispatch(getTodos());
+    }, [dispatch]);
 
     const handleActiveViewClick = (view) => {
         dispatch(setSelectedView(view));
