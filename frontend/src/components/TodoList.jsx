@@ -20,10 +20,6 @@ function Tasks() {
         dispatch(getTodos());
     }, [dispatch]);
 
-    if (isLoading) {
-        return <Spinner />;
-    }
-
     return (
         <main className="card-body">
             <h2 className="card-title text-primary">Tasks</h2>

@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createTodo, reset } from '../features/todo/todoSlice';
 import Spinner from './Spinner';
 import { toast } from 'react-toastify';
+import { setSelectedView } from '../features/activeView/activeViewSlice';
 
 function AddTask() {
     const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function AddTask() {
     const addTasks = (e) => {
         e.preventDefault();
         dispatch(createTodo(formData));
-        // navigate('/');
+        dispatch(setSelectedView('All'));
     };
 
     if (isLoading) {

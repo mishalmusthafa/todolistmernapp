@@ -59,7 +59,6 @@ function EditTask() {
     const updateTasks = (e) => {
         e.preventDefault();
         dispatch(updateTodo({ todoData: formData, id: currentTodoId }));
-        // dispatch(reset());
         dispatch(setSelectedView('All'));
     };
 
