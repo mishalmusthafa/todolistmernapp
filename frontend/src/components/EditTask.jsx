@@ -26,7 +26,9 @@ function EditTask() {
     const [formData, setFormData] = useState({
         title: selectedTodo.title || '',
         description: selectedTodo.description || '',
-        due: selectedTodo.due || '',
+        due: selectedTodo.due
+            ? new Date(selectedTodo.due).toISOString().split('T')[0]
+            : '',
         favourite: selectedTodo.favourite || false,
     });
 
@@ -126,17 +128,19 @@ function EditTask() {
                             name="due"
                         />
                     </div>
-                    {favourite ? (
-                        <FaStar
-                            className="text-4xl cursor-pointer text-yellow-400"
-                            onClick={toggleFavourite}
-                        />
-                    ) : (
-                        <CiStar
-                            className="text-4xl cursor-pointer"
-                            onClick={toggleFavourite}
-                        />
-                    )}
+                    <div className="">
+                        {favourite ? (
+                            <FaStar
+                                className="text-4xl cursor-pointer text-yellow-400"
+                                onClick={toggleFavourite}
+                            />
+                        ) : (
+                            <CiStar
+                                className="text-4xl cursor-pointer"
+                                onClick={toggleFavourite}
+                            />
+                        )}
+                    </div>
                 </div>
                 <button
                     type="submit"

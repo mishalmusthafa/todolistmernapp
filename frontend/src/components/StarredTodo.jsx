@@ -23,20 +23,21 @@ function StarredTodo() {
     const starredTodos = todos.filter((todo) => todo.favourite === true);
 
     if (isLoading) {
-        return <Spinner />;
+        <Spinner />;
     }
 
     return (
         <main className="card-body">
             <h2 className="card-title text-primary">Tasks</h2>
-            <ul className="space-y-2">
-                {starredTodos.map((todo) => (
-                    <li className="rounded-xl p-3 bg-white/20 " key={todo._id}>
+            {starredTodos.length === 0 ? (
+                <p className="mt-4 text-center text-lg">No tasks found</p>
+            ) : (
+                <ul className="space-y-2">
+                    {starredTodos.map((todo) => (
                         <TodoItem todo={todo} />
-                    </li>
-                ))}
-            </ul>
-            
+                    ))}
+                </ul>
+            )}
         </main>
     );
 }

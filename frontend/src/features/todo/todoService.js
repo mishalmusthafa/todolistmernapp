@@ -53,10 +53,25 @@ const updateTodo = async (todoData, id, token) => {
     return response.data;
 };
 
+// Update todo
+const deleteTodo = async (id, token) => {
+    console.log('got todoData', id);
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+
+    const response = await axios.delete(API_URL + id, config);
+    console.log(response.data);
+    return response.data;
+};
+
 const todoService = {
     createTodo,
     getTodos,
     getSingleTodo,
     updateTodo,
+    deleteTodo,
 };
 export default todoService;

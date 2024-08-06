@@ -10,3 +10,27 @@ body {
     font-weight: 400;
     font-style: normal;
 }
+
+.star-container {
+    display: inline-block;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.star-container:hover {
+    transform: scale(1.25);
+}
+
+.star {
+    display: block;
+}
+
+.star.favourite {
+    color: #fbbf24; /* Tailwind yellow-400 */
+}
+
+.star-container:active {
+    transform: rotate(360deg) scale(1.25);
+    transition: transform 0.3s ease;
+}

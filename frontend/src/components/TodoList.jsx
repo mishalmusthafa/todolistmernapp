@@ -23,13 +23,15 @@ function Tasks() {
     return (
         <main className="card-body">
             <h2 className="card-title text-primary">Tasks</h2>
-            <ul className="space-y-2">
-                {todos.map((todo) => (
-                    <li className="rounded-xl p-3 bg-white/20 " key={todo._id}>
+            {todos.length === 0 ? (
+                <p className="mt-4 text-center text-lg">No tasks found</p>
+            ) : (
+                <ul className="space-y-2">
+                    {todos.map((todo) => (
                         <TodoItem todo={todo} />
-                    </li>
-                ))}
-            </ul>
+                    ))}
+                </ul>
+            )}
         </main>
     );
 }

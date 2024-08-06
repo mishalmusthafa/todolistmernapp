@@ -93,6 +93,27 @@ export const updateTodo = createAsyncThunk(
     }
 );
 
+// Update todo
+export const deleteTodo = createAsyncThunk(
+    'todos/delete',
+    async (id, thunkAPI) => {
+        try {
+            console.log('Getting the data for updata to slice', id);
+            const token = thunkAPI.getState().auth.user.token;
+            return await todoService.deleteTodo(id, token);
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            console.log(message);
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 export const todoSlice = createSlice({
     name: 'todo',
     initialState,
@@ -173,6 +194,21 @@ export const todoSlice = createSlice({
                     state.todos[index] = updatedTodo;
                 }
                 state.selectedTodo = updatedTodo;
+            })
+            .addCase(deleteTodo.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteTodo.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+            })
+            .addCase(deleteTodo.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.todos = state.todos.filter(
+                    (todo) => todo._id !== action.payload.id
+                );
             });
     },
 });

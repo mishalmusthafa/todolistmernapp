@@ -72,7 +72,6 @@ const deleteTodo = asyncHandler(async (req, res) => {
     const user = req.user;
 
     const todo = await Todo.findById(req.params.id);
-    console.log(todo);
     if (!todo) {
         res.status(404);
         throw new Error('Todo item not found');
@@ -82,7 +81,7 @@ const deleteTodo = asyncHandler(async (req, res) => {
         throw new Error('Not Authorized');
     }
     await todo.deleteOne();
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, id: req.params.id });
 });
 
 const updateTodo = asyncHandler(async (req, res) => {
