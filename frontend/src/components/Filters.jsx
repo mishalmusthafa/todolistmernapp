@@ -2,11 +2,17 @@ import React from 'react';
 import { setSelectedView } from '../features/activeView/activeViewSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSidbarOpen } from '../features/sidebar/sidebarSlice';
+import { logout } from '../features/auth/authSlice';
 
 function Filters() {
     const dispatch = useDispatch();
     const handleActiveViewClick = (view) => {
         dispatch(setSelectedView(view));
+        dispatch(setSidbarOpen(false));
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
         dispatch(setSidbarOpen(false));
     };
 
@@ -17,18 +23,18 @@ function Filters() {
         <>
             {/* {/* Sidebar menu and filters */}
             {isSidebarOpen && (
-                <div className="h-full w-4/5">
+                <div className={`h-full w-4/5 md:hidden`}>
                     <div className="card bg-base-200 w-full h-full flex items-start">
                         <nav className="card-body w-full text-lg">
                             <h2 className="card-title text-primary mb-4">
                                 Filters
                             </h2>
-                            <ul className="space-y-2">
+                            <ul className="space-y-2 mb-4">
                                 {['All', 'Starred', 'Today', 'Week'].map(
                                     (view) => (
                                         <li
                                             key={view}
-                                            className={`text-start p-2 rounded-lg transition-colors ease duration-300 hover:bg-white/20 cursor-pointer ${
+                                            className={`text-start p-2 rounded-lg transition-colors ease duration-300  hover:bg-white/20 cursor-pointer ${
                                                 selectedView === view
                                                     ? 'bg-white/20'
                                                     : ''
@@ -41,6 +47,19 @@ function Filters() {
                                         </li>
                                     )
                                 )}
+                            </ul>
+
+                            {/* User Settings (Logout)*/}
+                            <h2 className="card-title text-primary mb-4">
+                                Users Settings
+                            </h2>
+                            <ul className="space-y-2">
+                                <li
+                                    className="text-start p-2 rounded-lg transition-colors ease duration-300 hover:bg-white/20 cursor-pointer"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </li>
                             </ul>
                         </nav>
                     </div>

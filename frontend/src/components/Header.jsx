@@ -12,7 +12,6 @@ function Header() {
     const { user } = useSelector((state) => state.auth);
 
     const onLogout = () => {
-        console.log('logging out');
         dispatch(logout());
         navigate('/login');
     };

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
@@ -57,8 +57,9 @@ function Login() {
     };
 
     return (
-        <div className="hero w-full ">
+        <div className="hero w-full relative ">
             {/* Login and other texts */}
+
             <div className="hero-content flex-col lg:flex-row-reverse items-center justify-center">
                 <div className="text-center lg:text-left min-w-80">
                     <h1 className="text-5xl font-bold">Login now!</h1>
@@ -114,6 +115,14 @@ function Login() {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>
                         </div>
+                        <p className="text-center">
+                            No account?
+                            <Link to="/register">
+                                <span className="link link-primary  text-center text-lg p-3 font-medium no-underline">
+                                    Create one
+                                </span>
+                            </Link>
+                        </p>
                     </form>
                 </div>
             </div>

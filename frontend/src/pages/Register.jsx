@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEye } from 'react-icons/fa';
 import { FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -168,6 +168,14 @@ function Register() {
                                 Register
                             </button>
                         </div>
+                        <p className="text-center">
+                            Already have an account?
+                            <Link to="/login">
+                                <span className="link link-primary  text-center text-lg p-3 font-medium no-underline">
+                                    Login
+                                </span>
+                            </Link>
+                        </p>
                     </form>
                 </div>
             </div>

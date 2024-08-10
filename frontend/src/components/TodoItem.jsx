@@ -56,7 +56,7 @@ function TodoItem({ todo }) {
             } `}
             key={todo._id}
         >
-            <div className="flex flex-col lg:flex-row justify-between gap-5 border-2">
+            <div className="flex flex-col lg:flex-row justify-between gap-5 ">
                 {/* Todo task completion and task title (Flex)*/}
                 <div className="flex items-center gap-3">
                     {/* Todo Task Completion checkbox*/}
@@ -66,11 +66,12 @@ function TodoItem({ todo }) {
                         checked={completed}
                         onChange={handleCheckboxChange}
                     />
+
                     {/*  Todo task title  */}
                     <div
-                        className={` text-ellipsis overflow-hidden md:w-96 cursor-pointer ${
+                        className={`text-ellipsis overflow-hidden md:w-96 cursor-pointer ${
                             completed ? 'line-through text-gray-500' : ''
-                        } border-4 `}
+                        }  `}
                         onClick={() =>
                             showSingleTodo(todo._id, 'ShowSingleTodo')
                         }
@@ -80,7 +81,7 @@ function TodoItem({ todo }) {
                 </div>
 
                 {/* Todo Tasks Actions (Flex)*/}
-                <div className="flex flex-row justify-center gap-4 border-2">
+                <div className="flex flex-row justify-center gap-4 ">
                     <MdDelete
                         className="text-2xl z-10 transition-transform ease duration-200 hover:scale-125 cursor-pointer"
                         onClick={() => onDeleteTodo(todo._id)}
