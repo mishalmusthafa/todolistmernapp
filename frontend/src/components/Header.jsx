@@ -26,7 +26,7 @@ function Header() {
                     </Link>
                 </div>
                 {/* Authenthication and theme switcher */}
-                <div className=" flex">
+                <div className="flex flex-row-reverse gap-5">
                     {user ? (
                         <>
                             {/* Logout Button */}

@@ -1,15 +1,22 @@
-import React from 'react';
-import { setSelectedView } from '../features/activeView/activeViewSlice';
+import React, { useEffect, useState } from 'react';
+import {
+    setLastSelectedView,
+    setSelectedView,
+} from '../features/activeView/activeViewSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSidbarOpen } from '../features/sidebar/sidebarSlice';
 import { logout } from '../features/auth/authSlice';
+import ThemeSwitcher from './ThemeSwitcher';
 
 function Filters() {
     const dispatch = useDispatch();
+    const { selectedView } = useSelector((state) => state.activeView);
+
     const handleActiveViewClick = (view) => {
         dispatch(setSelectedView(view));
         dispatch(setSidbarOpen(false));
     };
+
 
     const handleLogout = () => {
         dispatch(logout());
@@ -17,7 +24,6 @@ function Filters() {
     };
 
     const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
-    const selectedView = useSelector((state) => state.activeView.selectedView);
 
     return (
         <>
@@ -26,9 +32,12 @@ function Filters() {
                 <div className={`h-full w-4/5 md:hidden`}>
                     <div className="card bg-base-200 w-full h-full flex items-start">
                         <nav className="card-body w-full text-lg">
-                            <h2 className="card-title text-primary mb-4">
-                                Filters
-                            </h2>
+                            <div className="flex justify-between items-center">
+                                <h2 className="card-title text-primary ">
+                                    Filters
+                                </h2>
+                                <ThemeSwitcher />
+                            </div>
                             <ul className="space-y-2 mb-4">
                                 {['All', 'Starred', 'Today', 'Week'].map(
                                     (view) => (
@@ -50,7 +59,7 @@ function Filters() {
                             </ul>
 
                             {/* User Settings (Logout)*/}
-                            <h2 className="card-title text-primary mb-4">
+                            <h2 className="card-title text-primary ">
                                 Users Settings
                             </h2>
                             <ul className="space-y-2">

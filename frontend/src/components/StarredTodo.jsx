@@ -34,7 +34,7 @@ function StarredTodo() {
             ) : (
                 <ul className="space-y-2">
                     {starredTodos.map((todo) => (
-                        <TodoItem todo={todo} />
+                        <TodoItem todo={todo} key={todo._id} />
                     ))}
                 </ul>
             )}

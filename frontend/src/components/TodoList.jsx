@@ -28,7 +28,7 @@ function Tasks() {
             ) : (
                 <ul className="space-y-2">
                     {todos.map((todo) => (
-                        <TodoItem todo={todo} />
+                        <TodoItem todo={todo} key={todo._id} />
                     ))}
                 </ul>
             )}

@@ -7,6 +7,7 @@ import { reset, updateTodo } from '../features/todo/todoSlice';
 import Spinner from './Spinner';
 import { toast } from 'react-toastify';
 import { setSelectedView } from '../features/activeView/activeViewSlice';
+import BackButton from './BackButton';
 
 function EditTask() {
     const dispatch = useDispatch();
@@ -142,9 +143,15 @@ function EditTask() {
                         )}
                     </div>
                 </div>
+                {/* BackButton */}
+                <div className="absolute bottom-7 left-7">
+                    <BackButton  />
+                </div>
+
+                {/* Add Button */}
                 <button
                     type="submit"
-                    className="btn btn-primary mt-4 text-lg absolute bottom-5 right-5"
+                    className="btn btn-primary mt-4 text-lg absolute bottom-7 right-7"
                 >
                     Update
                 </button>

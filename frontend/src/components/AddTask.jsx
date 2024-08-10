@@ -7,6 +7,7 @@ import { createTodo, reset } from '../features/todo/todoSlice';
 import Spinner from './Spinner';
 import { toast } from 'react-toastify';
 import { setSelectedView } from '../features/activeView/activeViewSlice';
+import BackButton from './BackButton';
 
 function AddTask() {
     const dispatch = useDispatch();
@@ -62,6 +63,8 @@ function AddTask() {
     return (
         <main className="card-body">
             <h2 className="card-title text-primary">Add Tasks</h2>
+
+            {/* Form Field */}
             <form className="max-h-96 overflow-auto" onSubmit={addTasks}>
                 <div className="form-control">
                     <label htmlFor="title" className="label ">
@@ -131,9 +134,15 @@ function AddTask() {
                         />
                     )}
                 </div>
+                {/* BackButton */}
+                <div className="absolute bottom-7 left-7">
+                    <BackButton />
+                </div>
+
+                {/* Add Button */}
                 <button
                     type="submit"
-                    className="btn btn-primary mt-4 text-lg absolute bottom-5 right-5"
+                    className="btn btn-primary  text-lg absolute bottom-7 right-7"
                 >
                     Add
                 </button>

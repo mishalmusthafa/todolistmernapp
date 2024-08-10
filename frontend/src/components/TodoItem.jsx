@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSelectedView } from '../features/activeView/activeViewSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    setLastSelectedView,
+    setSelectedView,
+} from '../features/activeView/activeViewSlice';
 import {
     getSingleTodo,
     setCurrentTodoId,
@@ -14,6 +17,7 @@ import { MdDelete } from 'react-icons/md';
 function TodoItem({ todo }) {
     const dispatch = useDispatch();
     const [completed, setCompleted] = useState(todo.completed || false);
+    const { selectedView } = useSelector((state) => state.activeView);
 
     const showEditTodo = (id, view) => {
         dispatch(setCurrentTodoId(id));
@@ -21,6 +25,9 @@ function TodoItem({ todo }) {
     };
 
     const showSingleTodo = (id, view) => {
+        // Setting last selected view for the going back (Button)
+        dispatch(setLastSelectedView(selectedView));
+
         dispatch(getSingleTodo(id));
         dispatch(setSelectedView(view));
     };
