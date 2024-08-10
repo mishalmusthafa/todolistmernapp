@@ -53,18 +53,12 @@ function ShowSingleTodo() {
                                     showEditTodo(todo._id, 'EditTask')
                                 }
                             >
-                                Past Due{' '}
                                 {new Date(todo.due).toLocaleDateString()}
                             </p>
                         )}
                     </>
                 ) : (
-                    <button
-                        onClick={() => showEditTodo(todo._id, 'EditTask')}
-                        className="btn btn-primary mt-4 text-lg absolute bottom-5 right-5"
-                    >
-                        Edit
-                    </button>
+                    ''
                 )}
             </div>
         </main>

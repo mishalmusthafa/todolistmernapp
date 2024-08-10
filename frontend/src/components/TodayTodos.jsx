@@ -23,13 +23,13 @@ function TodayTodos() {
 
     const todayTodos = todos.filter((todo) => isToday(parseISO(todo.due)));
 
-    console.log(isToday(parseISO(todos[1].due)));
-
     return (
         <main className="card-body">
-            <h2 className="card-title text-primary">Tasks</h2>
+            <h2 className="card-title text-primary">Today's Task</h2>
             {todayTodos.length === 0 ? (
-                <p className="mt-4 text-center text-lg">No tasks found</p>
+                <p className="mt-4 text-center text-lg">
+                    No tasks found for today
+                </p>
             ) : (
                 <ul className="space-y-2">
                     {todayTodos.map((todo) => (

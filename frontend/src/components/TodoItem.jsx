@@ -84,7 +84,7 @@ function TodoItem({ todo }) {
                         className="text-2xl z-10 transition-transform ease duration-200 hover:scale-125 cursor-pointer"
                         onClick={() => showEditTodo(todo._id, 'EditTask')}
                     />
-                    <div className="transition-transform ease duration-200 hover:scale-125">
+                    <div className="transition-transform ease duration-200 hover:scale-125 ">
                         {todo.favourite ? (
                             <FaStar
                                 className="text-yellow-400 text-2xl cursor-pointer"
@@ -92,7 +92,7 @@ function TodoItem({ todo }) {
                             />
                         ) : (
                             <FaRegStar
-                                className="text-2xl cursor-pointer"
+                                className=" text-2xl cursor-pointer"
                                 onClick={toggleFavourite}
                             />
                         )}

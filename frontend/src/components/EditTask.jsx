@@ -96,7 +96,7 @@ function EditTask() {
                     </label>
                     <textarea
                         id="description"
-                        className="textarea"
+                        className="textarea min-h-28"
                         value={description}
                         onChange={onChange}
                         name="description"

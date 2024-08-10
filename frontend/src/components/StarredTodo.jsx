@@ -28,7 +28,7 @@ function StarredTodo() {
 
     return (
         <main className="card-body">
-            <h2 className="card-title text-primary">Tasks</h2>
+            <h2 className="card-title text-primary">Starred Tasks</h2>
             {starredTodos.length === 0 ? (
                 <p className="mt-4 text-center text-lg">No tasks found</p>
             ) : (
