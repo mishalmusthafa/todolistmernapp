@@ -18,19 +18,22 @@ function Header() {
     };
 
     return (
-        <nav className="relative mb-3">
-            <div className="flex justify-between py-3 px-5 items-center">
-                <div className="logo">
+        <nav className="hidden md:block relative mb-3 ">
+            <div className="flex justify-between py-3 pl-3  items-center  md:px-5">
+                {/* Logo */}
+                <div className="logo ">
                     <Link to="/">
-                        <h1 className="text-xl">TODO LISTS</h1>
+                        <h1 className="text-sm md:text-xl">TODO LISTS</h1>
                     </Link>
                 </div>
-                <div className="">
+                {/* Authenthication and theme switcher */}
+                <div className=" flex">
                     {user ? (
                         <>
+                            {/* Logout Button */}
                             <button
                                 onClick={onLogout}
-                                className="btn btn-primary mr-4 text-lg"
+                                className="btn btn-primary mr-4 text-md font-bold md:text-lg"
                             >
                                 logout
                             </button>
@@ -38,18 +41,21 @@ function Header() {
                     ) : (
                         <>
                             <Link to="/login">
-                                <button className="btn btn-primary mr-4 text-lg">
+                                {/* Login Button */}
+                                <button className="btn btn-primary mr-4 text-md font-bold md:text-lg">
                                     login
                                 </button>
                             </Link>
                             <Link to="/register">
-                                <button className="btn btn-primary mr-8  text-lg">
+                                {/* Register Button */}
+                                <button className="btn btn-primary mr-4 text-md font-bold md:text-lg">
                                     Register
                                 </button>
                             </Link>
                         </>
                     )}
 
+                    {/* Theme Switcher */}
                     <ThemeSwitcher />
                 </div>
             </div>

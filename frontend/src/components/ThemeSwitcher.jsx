@@ -18,7 +18,7 @@ const ThemeSwitcher = () => {
         <select
             value={theme}
             onChange={handleThemeChange}
-            className="select select-bordered"
+            className="w-24 select select-bordered "
         >
             <option value="light">Light</option>
             <option value="dark">Dark</option>

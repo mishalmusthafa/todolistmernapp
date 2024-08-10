@@ -3,14 +3,20 @@ import Spinner from './Spinner';
 import { useEffect } from 'react';
 import { getTodos, reset, setCurrentTodoId } from '../features/todo/todoSlice';
 import TodoItem from './TodoItem';
-import { setSelectedView } from '../features/activeView/activeViewSlice';
+import BackButton from './BackButton';
+import {
+    setLastSelectedView,
+    setSelectedView,
+} from '../features/activeView/activeViewSlice';
 
 function ShowSingleTodo() {
     const { todo, isLoading, isSuccess } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
-    const selectedView = useSelector((state) => state.activeView.selectedView);
+    const { selectedView, lastSelectedView } = useSelector(
+        (state) => state.activeView
+    );
 
-    const showEditTodo = (id, view) => {
+    const showTodo = (id, view) => {
         dispatch(setCurrentTodoId(id));
         dispatch(setSelectedView(view));
     };
@@ -35,23 +41,18 @@ function ShowSingleTodo() {
             </h1>
             <p className="mt-3">{todo.description}</p>
             <div className="btn mt-4 text-lg absolute bottom-5 right-5">
+                <BackButton />
                 {todo.due ? (
                     <>
                         {Date.parse(todo.due) > Date.now() ? (
-                            <p
-                                onClick={() =>
-                                    showEditTodo(todo._id, 'EditTask')
-                                }
-                            >
+                            <p onClick={() => showTodo(todo._id, 'EditTask')}>
                                 Due Date:{' '}
                                 {new Date(todo.due).toLocaleDateString()}
                             </p>
                         ) : (
                             <p
                                 className="text-red-900"
-                                onClick={() =>
-                                    showEditTodo(todo._id, 'EditTask')
-                                }
+                                onClick={() => showTodo(todo._id, 'EditTask')}
                             >
                                 {new Date(todo.due).toLocaleDateString()}
                             </p>

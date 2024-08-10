@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Todos from '../components/TodoList';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
@@ -13,10 +13,14 @@ import ShowSingleTodo from '../components/ShowSingleTodo';
 import Filters from '../components/Filters';
 import Hamburger from '../components/Hamburger';
 import { toggleSidebar } from '../features/sidebar/sidebarSlice';
-
+import { setLastSelectedView } from '../features/activeView/activeViewSlice';
+import { IoAdd } from 'react-icons/io5';
 function Home() {
     const dispatch = useDispatch();
     const selectedView = useSelector((state) => state.activeView.selectedView);
+    const lastSelectedView = useSelector(
+        (state) => state.activeView.lastSelectedView
+    );
     const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
 
     useEffect(() => {
@@ -54,11 +58,11 @@ function Home() {
 
     return (
         // Todo
-        <div className="flex flex-col items-center w-full">
-            <div className="w-full max-w-5xl px-4">
+        <div className="flex flex-col items-center w-full ">
+            <div className="w-full md:w-full max-w-5xl px-4 ">
                 {/* Header */}
-                <header className="flex items-center justify-between h-32 border-2">
-                    <h1 className="text-5xl border-2">
+                <header className="flex items-center justify-between h-32 ">
+                    <h1 className="text-5xl ">
                         to<span className="text-primary">do.</span>
                     </h1>
                     {/* Hamburger Icon*/}
@@ -71,13 +75,13 @@ function Home() {
                 </header>
 
                 {/* Todo Layout filters and tasks */}
-                <div className="flex justify-center gap-4 w-full h-full border-2 border-red-500">
+                <div className="flex justify-center gap-4 w-full h-full ">
                     {/* Fileters components */}
                     <Filters />
 
                     {/* Tasks layout */}
                     {!isSidebarOpen && (
-                        <div className="w-3/4 card bg-base-200 shadow-xl h-full border-2">
+                        <div className="w-full md:w-3/4 card bg-base-200 shadow-xl ">
                             {/* Rendering Tasks based on Filters */}
                             {renderContent()}
 
@@ -89,9 +93,9 @@ function Home() {
                                     onClick={() =>
                                         handleActiveViewClick('AddTask')
                                     }
-                                    className="btn btn-primary mt-4 text-lg absolute bottom-5 right-5"
+                                    className="btn fixed md: btn-primary text-xl md:absolute bottom-5 right-5 mt-4"
                                 >
-                                    Add tasks
+                                    <IoAdd />
                                 </button>
                             ) : (
                                 <></>
