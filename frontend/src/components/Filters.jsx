@@ -29,7 +29,7 @@ function Filters() {
         <>
             {/* {/* Sidebar menu and filters */}
             {isSidebarOpen && (
-                <div className={`h-full w-4/5 md:hidden`}>
+                <div className={`w-full h-full md:hidden `}>
                     <div className="card bg-base-200 w-full h-full flex items-start">
                         <nav className="card-body w-full text-lg">
                             <div className="flex justify-between items-center">

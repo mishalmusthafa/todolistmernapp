@@ -70,9 +70,9 @@ function EditTask() {
     }
 
     return (
-        <main className="card-body">
-            <h2 className="card-title text-primary">Edit Tasks</h2>
-            <form className="max-h-96 overflow-auto" onSubmit={updateTasks}>
+        <main className="p-2 card-body md:p-7">
+            <h2 className="pt-6 card-title text-primary">Edit Tasks</h2>
+            <form className="overflow-auto md:max-h-96" onSubmit={updateTasks}>
                 <div className="form-control">
                     <label htmlFor="title" className="label ">
                         <span className="label-text text-primary text-lg">
@@ -104,7 +104,8 @@ function EditTask() {
                         required
                     />
                 </div>
-                <div className="flex gap-3 justify-between items-end">
+                {/* star date and project */}
+                <div className="flex gap-3 flex-wrap justify-between items-end">
                     <div className="form-control">
                         <label htmlFor="project" className="label">
                             <span className="label-text text-primary text-lg">
@@ -144,14 +145,14 @@ function EditTask() {
                     </div>
                 </div>
                 {/* BackButton */}
-                <div className="absolute bottom-7 left-7">
-                    <BackButton  />
+                <div className="absolute bottom-7 left-0 md:left-7">
+                    <BackButton />
                 </div>
 
                 {/* Add Button */}
                 <button
                     type="submit"
-                    className="btn btn-primary mt-4 text-lg absolute bottom-7 right-7"
+                    className="btn btn-primary mt-4 text-lg absolute bottom-7 right-3 md:right-7"
                 >
                     Update
                 </button>

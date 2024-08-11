@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Spinner from './Spinner';
 import { useEffect } from 'react';
 import { getTodos, reset } from '../features/todo/todoSlice';
-import TodoItem from './TodoItem';
+import Todos from './Todos';
 
 function StarredTodo() {
     const { todos, isLoading, isSuccess } = useSelector((state) => state.todo);
@@ -27,18 +27,11 @@ function StarredTodo() {
     }
 
     return (
-        <main className="card-body">
-            <h2 className="card-title text-primary">Starred Tasks</h2>
-            {starredTodos.length === 0 ? (
-                <p className="mt-4 text-center text-lg">No tasks found</p>
-            ) : (
-                <ul className="space-y-2">
-                    {starredTodos.map((todo) => (
-                        <TodoItem todo={todo} key={todo._id} />
-                    ))}
-                </ul>
-            )}
-        </main>
+        <Todos
+            todos={starredTodos}
+            title={'Starred Tasks'}
+            message={'No tasks found'}
+        />
     );
 }
 

@@ -10,13 +10,14 @@ function ShowSingleTodo() {
     const { todo, isLoading, isSuccess } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        return () => {
-            if (isSuccess) {
-                dispatch(reset());
-            }
-        };
-    }, [dispatch, isSuccess]);
+    // Use it if needed
+    // useEffect(() => {
+    //     return () => {
+    //         if (isSuccess) {
+    //             // dispatch(reset());
+    //         }
+    //     };
+    // }, [dispatch, isSuccess]);
 
     const showTodo = (id, view) => {
         dispatch(setCurrentTodoId(id));
@@ -28,9 +29,9 @@ function ShowSingleTodo() {
     }
 
     return (
-        <main className="card-body">
+        <main className=" p-2 card-body md:p-8">
             {/* Task title */}
-            <h2 className="card-title text-primary">Task</h2>
+            <h2 className="pt-6 card-title text-primary">Task</h2>
             <h1 className="border-b-4 border-primary text-lg font-bold py-2">
                 {todo.title}
             </h1>
@@ -39,11 +40,11 @@ function ShowSingleTodo() {
             <p className="mt-3">{todo.description}</p>
             {/* Back Button and date*/}
             {/* Back button */}
-            <div className="text-lg absolute bottom-7 left-7">
+            <div className="text-lg absolute bottom-4 left-0 md:left-7 ">
                 <BackButton />
             </div>
             {/* Todo Date */}
-            <div className="btn mt-4 text-lg absolute bottom-7 right-7">
+            <div className="btn mt-4 text-lg absolute bottom-7 right-1 md:7">
                 {todo.due ? (
                     <>
                         {Date.parse(todo.due) > Date.now() ? (

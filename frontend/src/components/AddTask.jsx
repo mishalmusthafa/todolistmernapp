@@ -61,11 +61,11 @@ function AddTask() {
     }
 
     return (
-        <main className="card-body">
+        <main className="p-2 card-body min-h-full md:p-8">
             <h2 className="card-title text-primary">Add Tasks</h2>
 
             {/* Form Field */}
-            <form className="max-h-96 overflow-auto" onSubmit={addTasks}>
+            <form className=" overflow-auto md:max-h-96" onSubmit={addTasks}>
                 <div className="form-control">
                     <label htmlFor="title" className="label ">
                         <span className="label-text text-primary text-lg">
@@ -97,7 +97,7 @@ function AddTask() {
                         required
                     />
                 </div>
-                <div className="flex gap-3 justify-between items-end">
+                <div className="flex flex-wrap gap-3 justify-between items-end">
                     <div className="form-control">
                         <label htmlFor="project" className="label">
                             <span className="label-text text-primary text-lg">
@@ -135,14 +135,14 @@ function AddTask() {
                     )}
                 </div>
                 {/* BackButton */}
-                <div className="absolute bottom-7 left-7">
+                <div className="absolute bottom-7 left-0 md:left-7">
                     <BackButton />
                 </div>
 
                 {/* Add Button */}
                 <button
                     type="submit"
-                    className="btn btn-primary  text-lg absolute bottom-7 right-7"
+                    className="btn btn-primary  text-lg absolute bottom-7 right-2 md:right-7"
                 >
                     Add
                 </button>
