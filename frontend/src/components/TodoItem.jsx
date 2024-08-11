@@ -20,6 +20,7 @@ function TodoItem({ todo }) {
     const { selectedView } = useSelector((state) => state.activeView);
 
     const showEditTodo = (id, view) => {
+        dispatch(setLastSelectedView(selectedView));
         dispatch(setCurrentTodoId(id));
         dispatch(setSelectedView(view));
     };

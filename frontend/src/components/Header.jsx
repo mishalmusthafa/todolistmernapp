@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import ThemeSwitcher from './ThemeSwitcher';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, reset } from '../features/auth/authSlice';
-import { toast } from 'react-toastify';
+import { logout } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Header() {

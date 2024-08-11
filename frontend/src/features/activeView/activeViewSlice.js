@@ -10,11 +10,9 @@ const activeViewSlice = createSlice({
     initialState,
     reducers: {
         setSelectedView: (state, action) => {
-            console.log('Setting the selected view', action.payload);
             state.selectedView = action.payload;
         },
         setLastSelectedView: (state, action) => {
-            console.log('Setting the last select view to', action.payload);
             state.lastSelectedView = action.payload;
         },
     },

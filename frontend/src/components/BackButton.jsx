@@ -7,7 +7,6 @@ function BackButton() {
     const { lastSelectedView } = useSelector((state) => state.activeView);
 
     const handleBackButton = () => {
-        console.log(lastSelectedView);
         dispatch(setSelectedView(lastSelectedView));
     };
 

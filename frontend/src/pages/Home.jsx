@@ -1,26 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import Todos from '../components/TodoList';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTodos, createTodo, reset } from '../features/todo/todoSlice';
+import { getTodos } from '../features/todo/todoSlice';
+import AllTodos from '../components/AllTodos';
 import Starred from '../components/StarredTodo';
-import Tasks from '../components/TodoList';
 import TodayTodos from '../components/TodayTodos';
 import WeekTodo from '../components/WeekTodo';
 import AddTask from '../components/AddTask';
 import EditTask from '../components/EditTask';
-import { setSelectedView } from '../features/activeView/activeViewSlice';
+import {
+    setLastSelectedView,
+    setSelectedView,
+} from '../features/activeView/activeViewSlice';
 import ShowSingleTodo from '../components/ShowSingleTodo';
 import Filters from '../components/Filters';
 import Hamburger from '../components/Hamburger';
 import { toggleSidebar } from '../features/sidebar/sidebarSlice';
-import { setLastSelectedView } from '../features/activeView/activeViewSlice';
 import { IoAdd } from 'react-icons/io5';
 function Home() {
     const dispatch = useDispatch();
     const selectedView = useSelector((state) => state.activeView.selectedView);
-    const lastSelectedView = useSelector(
-        (state) => state.activeView.lastSelectedView
-    );
     const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
 
     useEffect(() => {
@@ -28,6 +26,7 @@ function Home() {
     }, [dispatch]);
 
     const handleActiveViewClick = (view) => {
+        dispatch(setLastSelectedView(selectedView));
         dispatch(setSelectedView(view));
     };
 
@@ -38,7 +37,7 @@ function Home() {
     const renderContent = () => {
         switch (selectedView) {
             case 'All':
-                return <Todos />;
+                return <AllTodos />;
             case 'Starred':
                 return <Starred />;
             case 'Today':
@@ -52,7 +51,7 @@ function Home() {
             case 'ShowSingleTodo':
                 return <ShowSingleTodo />;
             default:
-                return <Todos />;
+                return <AllTodos />;
         }
     };
 
@@ -93,7 +92,7 @@ function Home() {
                                     onClick={() =>
                                         handleActiveViewClick('AddTask')
                                     }
-                                    className="btn fixed md: btn-primary text-xl md:absolute bottom-5 right-5 mt-4"
+                                    className="btn fixed md: btn-primary text-2xl md:absolute bottom-5 right-5 mt-4"
                                 >
                                     <IoAdd />
                                 </button>

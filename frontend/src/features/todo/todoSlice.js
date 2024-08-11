@@ -18,8 +18,6 @@ export const createTodo = createAsyncThunk(
     async (todoData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token;
-            console.log('Creating todos');
-            console.log('Todo data', todoData);
             return await todoService.createTodo(todoData, token);
         } catch (error) {
             const message =
@@ -28,7 +26,6 @@ export const createTodo = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
-            console.log(message);
             return thunkAPI.rejectWithValue(message);
         }
     }
@@ -77,7 +74,6 @@ export const updateTodo = createAsyncThunk(
     'todos/update',
     async ({ todoData, id }, thunkAPI) => {
         try {
-            console.log('Getting the data for updata to slice', todoData);
             const token = thunkAPI.getState().auth.user.token;
             return await todoService.updateTodo(todoData, id, token);
         } catch (error) {
@@ -87,7 +83,6 @@ export const updateTodo = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
-            console.log(message);
             return thunkAPI.rejectWithValue(message);
         }
     }
@@ -98,7 +93,6 @@ export const deleteTodo = createAsyncThunk(
     'todos/delete',
     async (id, thunkAPI) => {
         try {
-            console.log('Getting the data for updata to slice', id);
             const token = thunkAPI.getState().auth.user.token;
             return await todoService.deleteTodo(id, token);
         } catch (error) {
@@ -108,7 +102,6 @@ export const deleteTodo = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
-            console.log(message);
             return thunkAPI.rejectWithValue(message);
         }
     }
@@ -131,7 +124,6 @@ export const todoSlice = createSlice({
         setCurrentTodoId: (state, action) => {
             state.selectedTodo =
                 state.todos.find((todo) => todo._id === action.payload) || {};
-            console.log(state.selectedTodo);
             state.currentTodoId = action.payload;
         },
     },
