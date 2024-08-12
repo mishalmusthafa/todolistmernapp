@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CiStar } from 'react-icons/ci';
 import { FaStar } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,7 +10,6 @@ import BackButton from './BackButton';
 
 function EditTask() {
     const dispatch = useDispatch();
-
 
     const {
         selectedTodo,
