@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { resetAll } from '../features/todo/todoSlice';
 
 function Logout() {
     const navigate = useNavigate();
@@ -8,6 +9,7 @@ function Logout() {
 
     const onLogout = () => {
         dispatch(logout());
+        dispatch(resetAll());
         navigate('/login');
     };
     return (

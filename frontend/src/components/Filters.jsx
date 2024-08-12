@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSidbarOpen } from '../features/sidebar/sidebarSlice';
 import { logout } from '../features/auth/authSlice';
 import ThemeSwitcher from './ThemeSwitcher';
+import { resetAll } from '../features/todo/todoSlice';
 
 function Filters() {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Filters() {
 
     const handleLogout = () => {
         dispatch(logout());
+        dispatch(resetAll());
         dispatch(setSidbarOpen(false));
     };
 

@@ -117,6 +117,7 @@ export const todoSlice = createSlice({
             state.isError = false;
             state.message = '';
         },
+        resetAll: (state) => initialState,
         clearTodos: (state) => {
             state.todos = [];
         },
@@ -204,5 +205,5 @@ export const todoSlice = createSlice({
     },
 });
 
-export const { reset, setCurrentTodoId } = todoSlice.actions;
+export const { reset, setCurrentTodoId, resetAll } = todoSlice.actions;
 export default todoSlice.reducer;

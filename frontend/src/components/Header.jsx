@@ -3,6 +3,7 @@ import ThemeSwitcher from './ThemeSwitcher';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { resetAll } from '../features/todo/todoSlice';
 
 function Header() {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function Header() {
 
     const onLogout = () => {
         dispatch(logout());
+        dispatch(resetAll())
         navigate('/login');
     };
 
