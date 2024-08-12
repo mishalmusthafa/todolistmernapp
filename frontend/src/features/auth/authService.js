@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = '/api/users';
+const API_URL = 'https://todolistmernapp-backend.onrender.com/api/users';
 
 //Register user
 const register = async (userData) => {
@@ -19,7 +19,7 @@ const register = async (userData) => {
 //Login user
 const login = async (userData) => {
     console.log('Triying to login with user with userdata', userData);
-    console.log(API_URL);
+    console.log('This is url', API_URL);
     const response = await axios.post(API_URL + '/login', userData);
 
     if (response.data) {
