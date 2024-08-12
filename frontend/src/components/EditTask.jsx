@@ -36,9 +36,8 @@ function EditTask() {
             toast.error(message);
         }
         if (isSuccess) {
-            dispatch(reset());
+            dispatch(setSelectedView('All'));
         }
-        dispatch(reset());
     }, [dispatch, isError, message, isSuccess]);
 
     const onChange = (e) => {
@@ -58,7 +57,6 @@ function EditTask() {
     const updateTasks = (e) => {
         e.preventDefault();
         dispatch(updateTodo({ todoData: formData, id: currentTodoId }));
-        dispatch(setSelectedView('All'));
     };
 
     if (isLoading) {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTodos } from '../features/todo/todoSlice';
+import { getTodos, reset } from '../features/todo/todoSlice';
 import AllTodos from '../components/AllTodos';
 import Starred from '../components/StarredTodo';
 import TodayTodos from '../components/TodayTodos';
@@ -16,10 +16,15 @@ import Filters from '../components/Filters';
 import Hamburger from '../components/Hamburger';
 import { toggleSidebar } from '../features/sidebar/sidebarSlice';
 import { IoAdd } from 'react-icons/io5';
+import { toast } from 'react-toastify';
+import Spinner from '../components/Spinner';
 function Home() {
     const dispatch = useDispatch();
     const selectedView = useSelector((state) => state.activeView.selectedView);
     const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
+    const { isError, message, isSuccess, isLoading } = useSelector(
+        (state) => state.todo
+    );
 
     useEffect(() => {
         dispatch(getTodos());
@@ -33,6 +38,15 @@ function Home() {
     const handleToggleSidebar = (e) => {
         dispatch(toggleSidebar());
     };
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(message);
+        }
+        if (isSuccess) {
+            dispatch(reset());
+        }
+    }, [dispatch, isError, message, isSuccess]);
 
     const renderContent = () => {
         switch (selectedView) {

@@ -31,9 +31,8 @@ function AddTask() {
             toast.error(message);
         }
         if (isSuccess) {
-            dispatch(reset());
+            dispatch(setSelectedView('All'));
         }
-        dispatch(reset());
     }, [dispatch, isError, isSuccess, message, navigate]);
 
     const onChange = (e) => {
@@ -53,7 +52,6 @@ function AddTask() {
     const addTasks = (e) => {
         e.preventDefault();
         dispatch(createTodo(formData));
-        dispatch(setSelectedView('All'));
     };
 
     if (isLoading) {

@@ -12,7 +12,7 @@ function Spinner() {
     }, []);
 
     return (
-        <div className="h-screen">
+        <div className="max-h-screen">
             <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black/25 z-50">
                 <span className="loading loading-dots loading-lg"></span>
             </div>

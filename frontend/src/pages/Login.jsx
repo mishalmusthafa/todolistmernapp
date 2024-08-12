@@ -5,6 +5,7 @@ import { FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../components/Spinner';
 
 function Login() {
     const navigate = useNavigate();
@@ -21,18 +22,19 @@ function Login() {
     const { email, password } = formData;
     const { showPassword1 } = showPassword;
 
-    const { user, isSuccess, isError, message } = useSelector(
+    const { user, isSuccess, isError, message, isLoading } = useSelector(
         (state) => state.auth
     );
 
     useEffect(() => {
         if (isSuccess || user) {
             navigate('/');
+            dispatch(reset());
         }
         if (isError || message) {
             toast.error(message);
+            dispatch(reset());
         }
-        dispatch(reset());
     }, [isError, isSuccess, user, message, navigate, dispatch]);
 
     const onChange = (e) => {
@@ -55,6 +57,9 @@ function Login() {
         }));
     };
 
+    if (isLoading) {
+        return <Spinner />;
+    }
     return (
         <div className="hero w-full relative ">
             {/* Login and other texts */}

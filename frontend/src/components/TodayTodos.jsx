@@ -8,13 +8,13 @@ function TodayTodos() {
     const { todos, isSuccess } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        return () => {
-            if (isSuccess) {
-                dispatch(reset());
-            }
-        };
-    }, [dispatch, isSuccess]);
+    // useEffect(() => {
+    //     return () => {
+    //         if (isSuccess) {
+    //             dispatch(reset());
+    //         }
+    //     };
+    // }, [dispatch, isSuccess]);
 
     useEffect(() => {
         dispatch(getTodos());
