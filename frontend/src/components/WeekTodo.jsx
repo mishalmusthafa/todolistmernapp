@@ -20,9 +20,12 @@ function WeekTodos() {
         dispatch(getTodos());
     }, [dispatch]);
 
-    const thisWeekTodos = todos.filter((todo) =>
-        isThisWeek(parseISO(todo.due))
-    );
+    const thisWeekTodos = todos.filter((todo) => {
+        if (todo.due) {
+            return isThisWeek(parseISO(todo.due));
+        }
+        return false;
+    });
 
     return (
         <Todos

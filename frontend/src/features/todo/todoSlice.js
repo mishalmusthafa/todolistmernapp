@@ -112,7 +112,6 @@ export const todoSlice = createSlice({
     initialState,
     reducers: {
         reset: (state) => {
-            state.todo = {};
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = false;
