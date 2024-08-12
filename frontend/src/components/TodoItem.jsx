@@ -77,7 +77,7 @@ function TodoItem({ todo }) {
 
                     {/*  Todo task title  */}
                     <div
-                        className={`text-ellipsis overflow-hidden md:w-96 cursor-pointer ${
+                        className={`text-ellipsis w-screen overflow-hidden  md:w-96 cursor-pointer ${
                             completed ? 'line-through text-gray-500' : ''
                         }  `}
                         onClick={() =>

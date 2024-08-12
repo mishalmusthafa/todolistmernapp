@@ -5,7 +5,6 @@ import { FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Spinner from '../components/Spinner';
 
 function Login() {
     const navigate = useNavigate();
