@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://todolistmernapp-backend.onrender.comapi/todos/';
+const API_URL = 'https://todolistmernapp-backend.onrender.com/api/todos';
 
 // Create new todo
 const createTodo = async (todoData, token) => {
