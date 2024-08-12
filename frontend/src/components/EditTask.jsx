@@ -11,9 +11,7 @@ import BackButton from './BackButton';
 
 function EditTask() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
-    const selectedView = useSelector((state) => state.activeView.selectedView);
 
     const {
         selectedTodo,

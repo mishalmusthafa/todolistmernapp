@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Spinner from './Spinner';
 import { useEffect } from 'react';
 import { getTodos, reset } from '../features/todo/todoSlice';
-import TodoItem from './TodoItem';
 import { isToday, parseISO } from 'date-fns';
 import Todos from './Todos';
 

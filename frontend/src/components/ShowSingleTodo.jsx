@@ -1,13 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from './Spinner';
-import { useEffect } from 'react';
-import { getTodos, reset, setCurrentTodoId } from '../features/todo/todoSlice';
-import TodoItem from './TodoItem';
+import {  setCurrentTodoId } from '../features/todo/todoSlice';
 import BackButton from './BackButton';
 import { setSelectedView } from '../features/activeView/activeViewSlice';
 
 function ShowSingleTodo() {
-    const { todo, isLoading, isSuccess } = useSelector((state) => state.todo);
+    const { todo, isLoading,  } = useSelector((state) => state.todo);
     const dispatch = useDispatch();
 
     // Use it if needed

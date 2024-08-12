@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import {
-    setLastSelectedView,
-    setSelectedView,
-} from '../features/activeView/activeViewSlice';
+import { setSelectedView } from '../features/activeView/activeViewSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSidbarOpen } from '../features/sidebar/sidebarSlice';
 import { logout } from '../features/auth/authSlice';
@@ -16,7 +12,6 @@ function Filters() {
         dispatch(setSelectedView(view));
         dispatch(setSidbarOpen(false));
     };
-
 
     const handleLogout = () => {
         dispatch(logout());
