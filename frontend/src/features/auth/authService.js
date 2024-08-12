@@ -8,19 +8,25 @@ const register = async (userData) => {
     const response = await axios.post(API_URL, userData);
 
     if (response.data) {
+        console.log('got the response data', response.data);
         localStorage.setItem('user', JSON.stringify(response.data));
+    } else {
+        console.log('No response from the server');
     }
     return response.data;
 };
 
-
 //Login user
 const login = async (userData) => {
     console.log('Triying to login with user with userdata', userData);
+    console.log(API_URL);
     const response = await axios.post(API_URL + '/login', userData);
 
     if (response.data) {
+        console.log('got the response data', response.data);
         localStorage.setItem('user', JSON.stringify(response.data));
+    } else {
+        console.log('No response from the server');
     }
     return response.data;
 };
