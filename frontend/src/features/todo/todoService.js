@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://todolistmernapp-production.up.railway.app/api/todos/';
+const API_URL = 'https://todolistmernapp-backend.up.railway.app/api/todos/';
 
 // Create new todo
 const createTodo = async (todoData, token) => {
