@@ -13,6 +13,7 @@ const app = express();
 const allowedOrigins = [
     'http://localhost:3000',
     'https://todolistmernapp-frontend.onrender.com',
+    'https://todolistmernapp-backend.up.railway.app/',
 ];
 
 app.use(
