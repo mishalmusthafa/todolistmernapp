@@ -34,7 +34,9 @@ function TodoItem({ todo }) {
     };
 
     const onDeleteTodo = (id) => {
-        dispatch(deleteTodo(id));
+        if (window.confirm('Are you sure?') === true) {
+            dispatch(deleteTodo(id));
+        }
     };
 
     const toggleFavourite = () => {
